@@ -13,6 +13,7 @@ export default function Login() {
 
     const loginUser = async(userData) => {
         let res = await axios.post(`${ApiUrl}/users/login`, userData)
+        console.log(res.data)
         if(res.data.loginSuccess){
             setSuccessLogin(true)
             setToken(res.data.token) 

@@ -10,7 +10,6 @@ const GmpsApiKey = process.env.REACT_APP_GMAPS_API_KEY
 const ApiUrl = process.env.REACT_APP_APIURL
 
 export default function EditProperty(props) {
-    console.log(props)
     const [ownerName, setOwnerName] = useState('')
     const [ownerWallet, setOwnerWallet] = useState('')
     const [ownerCurp, setOwnerCurp] = useState('')
