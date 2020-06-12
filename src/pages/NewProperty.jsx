@@ -33,42 +33,42 @@ export default function NewProperty(props) {
     const [statehash, setHash] = useState('')
     const [counter, setCounter] = useState('')
 
-    useEffect(() => {
-        const loadWeb3 = async() => {
-            if (window.ethereum) {
-                window.web3 = new Web3(window.ethereum)
-                await window.ethereum.enable()
-            }
-            else if (window.web3) {
-                window.web3 = new Web3(window.web3.currentProvider)
-            }
-            else {
-                window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-            }
-        }
-        const loadBlockchainData = async() => {
-            const web3 = window.web3
-            const accounts = await web3.eth.getAccounts()
-            setAccount(accounts[0])
-            if(account) {
-                const ethBalance = await web3.eth.getBalance(account)
-                console.log('%c Cuenta y Balance ', 'color: #035fb9; background-color: #b0f566' , account, ethBalance)
-                setEthBalance(ethBalance)
-                //Load HOUSES Contract
-                const networkId = await web3.eth.net.getId()
-                const housesData = Houses.networks[networkId]
-                if(housesData) {
-                  const houses = new web3.eth.Contract(Houses.abi, housesData.address)
-                  setHouses(houses)
-                  console.log(houses)
-                } else {
-                    window.alert('EthSwap contract not deployed to detected network.')
-                }
-            }
-        }
-        loadWeb3()
-        loadBlockchainData()
-    }, [account])
+    // useEffect(() => {
+    //     const loadWeb3 = async() => {
+    //         if (window.ethereum) {
+    //             window.web3 = new Web3(window.ethereum)
+    //             await window.ethereum.enable()
+    //         }
+    //         else if (window.web3) {
+    //             window.web3 = new Web3(window.web3.currentProvider)
+    //         }
+    //         else {
+    //             window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    //         }
+    //     }
+    //     const loadBlockchainData = async() => {
+    //         const web3 = window.web3
+    //         const accounts = await web3.eth.getAccounts()
+    //         setAccount(accounts[0])
+    //         if(account) {
+    //             const ethBalance = await web3.eth.getBalance(account)
+    //             console.log('%c Cuenta y Balance ', 'color: #035fb9; background-color: #b0f566' , account, ethBalance)
+    //             setEthBalance(ethBalance)
+    //             //Load HOUSES Contract
+    //             const networkId = await web3.eth.net.getId()
+    //             const housesData = Houses.networks[networkId]
+    //             if(housesData) {
+    //               const houses = new web3.eth.Contract(Houses.abi, housesData.address)
+    //               setHouses(houses)
+    //               console.log(houses)
+    //             } else {
+    //                 window.alert('EthSwap contract not deployed to detected network.')
+    //             }
+    //         }
+    //     }
+    //     loadWeb3()
+    //     loadBlockchainData()
+    // }, [account])
 
     useEffect(() => {
         const allHouses = async() => {
@@ -80,20 +80,20 @@ export default function NewProperty(props) {
         allHouses()
     }, [])
 
-    useEffect(() => {
-        const getAllHouses = () => {
-            if (houses) {
-                houses.methods
-                .getAll()
-                .call()
-                .then((allHouses) => {
-                    console.log('%c Arreglo con todas las casas', 'color: #4af2a1', allHouses)
-                    return allHouses
-                })
-            }
-        }
-        getAllHouses()
-    }, [houses])
+    // useEffect(() => {
+    //     const getAllHouses = () => {
+    //         if (houses) {
+    //             houses.methods
+    //             .getAll()
+    //             .call()
+    //             .then((allHouses) => {
+    //                 console.log('%c Arreglo con todas las casas', 'color: #4af2a1', allHouses)
+    //                 return allHouses
+    //             })
+    //         }
+    //     }
+    //     getAllHouses()
+    // }, [houses])
 
     const createHouse = async(data) => {
         let {
