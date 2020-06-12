@@ -26,7 +26,7 @@ const Map = (props) => {
         let data = {}
         if (response.results[0].address_components[6] && response.results[0].address_components[6].types.includes('postal_code') && response.results[0].address_components[6].long_name) {
           data.cp = response.results[0].address_components[6].long_name
-        } else if (response.results[0].address_components[7].types.includes('postal_code') && response.results[0].address_components[7].long_name) {
+        } else if (response.results[0].address_components[7] && response.results[0].address_components[7].types.includes('postal_code') && response.results[0].address_components[7].long_name) {
           data.cp = response.results[0].address_components[7].long_name
         } else {
           data.cp = ''

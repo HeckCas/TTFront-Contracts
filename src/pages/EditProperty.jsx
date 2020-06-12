@@ -151,7 +151,7 @@ export default function EditProperty(props) {
             </div> : 
             <div className="container">
                 <div className="row title_register">
-                    <h3>Registro de Nuevo Inmueble</h3>
+                    <h3>Editar Inmueble</h3>
                     <hr className="divider__Style"/>
                 </div>
                 <div className="row form__container">
