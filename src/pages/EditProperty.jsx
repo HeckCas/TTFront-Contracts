@@ -37,6 +37,7 @@ export default function EditProperty(props) {
 
     useEffect(() => {
         getProperty(props.id)
+        
         return () => {
             console.log('remove from EditProperty')
         }
