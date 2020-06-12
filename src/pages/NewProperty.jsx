@@ -80,8 +80,35 @@ export default function NewProperty(props) {
         allHouses()
     }, [])
 
+    // useEffect(() => {
+    //     const getAllHouses = () => {
+    //         if (houses) {
+    //             houses.methods
+    //             .getAll()
+    //             .call()
+    //             .then((allHouses) => {
+    //                 console.log('%c Arreglo con todas las casas', 'color: #4af2a1', allHouses)
+    //                 return allHouses
+    //             })
+    //         }
+    //     }
+    //     getAllHouses()
+    // }, [houses])
+
     // const createHouse = async(data) => {
-    //     let {ownerName, ownerWallet, ubicacion} = data
+    //     let {
+    //         ownerName,
+    //         ownerWallet,
+    //         ownerCurp,
+    //         birthdate,
+    //         deedNumber,
+    //         notaria,
+    //         walletNotario,
+    //         numSolicitud,
+    //         ubicacion
+    //     } = data
+
+    //     let locationData = [calle, numExterior, numInterior, colonia, estado, municipio, codigoPosal]
     //     swal({
     //     title: "Se está a punto de registrar un nuevo Inmueble",
     //     text: `
@@ -96,7 +123,18 @@ export default function NewProperty(props) {
     //     .then((acceptHouse) => {
     //     if (acceptHouse) {
     //         houses.methods
-    //         .createHouse(ubicacion, ownerName, ownerWallet)
+    //         .createHouse(
+    //             ownerName,
+    //             ownerWallet,
+    //             ownerCurp,
+    //             birthdate,
+    //             deedNumber,
+    //             notaria,
+    //             walletNotario,
+    //             numSolicitud,
+    //             ubicacion,
+    //             locationData
+    //         )
     //         .send({ from: account })
     //         .on('transactionHash', (hash) => {
     //             swal({
@@ -120,7 +158,7 @@ export default function NewProperty(props) {
     //     }
     //     });
     // }
-    
+
     const regNewProperty = async(data, hash) => {
         const allData = {
             ...data,
