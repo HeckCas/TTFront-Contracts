@@ -7,6 +7,9 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import EditProperty from './pages/EditProperty'
+import Certificado from './pages/Certifiado'
+
+
 import axios from 'axios'
 const ApiUrl = process.env.REACT_APP_APIURL
 
@@ -36,6 +39,13 @@ function App() {
           Properties.map(property => ( 
             <PrivateRoute key={property._id} exact path={`/edit/property/${property._id}`} component={ 
               () => <EditProperty id={property._id}/> }
+            />
+          ))
+        }
+        {
+          Properties.map(property => ( 
+            <Route key={property._id} exact path={`/certificado/${property._id}`} component={ 
+              () => <Certificado id={property._id}/> }
             />
           ))
         }

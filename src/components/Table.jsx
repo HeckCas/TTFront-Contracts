@@ -53,7 +53,7 @@ const TableBody = (props) => {
               </td>
             } else if (value === 'Ver certificado') {
               return <td key={index}>
-                <Link to='/new/property' className="btn btn-primary text-right" style={{color: 'white'}}>
+                <Link to={`/certificado/${row._id}`} className="btn btn-primary text-right" style={{color: 'white'}}>
                   <i className="material-icons">perm_media</i>
                 </Link>
               </td>
