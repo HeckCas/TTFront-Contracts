@@ -4,14 +4,6 @@ pragma experimental ABIEncoderV2;
 
 contract Houses {
     constructor() public {}
-    uint dnaDigits = 16;
-    uint dnaModulus = 10 ** dnaDigits;
-
-    // struct House {
-    //     string direccion;
-    //     string propietario;
-    //     address wallet;
-    // }
 
     struct House {
         string propietario;
@@ -30,19 +22,6 @@ contract Houses {
 
     mapping (uint => address) public houseToOwner;
 
-    // function createHouse(string memory _direccion, string memory _propietario, address _wallet) public {
-    //     uint id = houses.push(House(_direccion, _propietario, _wallet)) - 1;
-    //     houseToOwner[id] = _wallet;
-    // }
-
-    // function createHouse(House[] memory _houses)  public {
-    //     string memory _direccion = string(_houses[0]);
-    //     string memory _propietario = bytes(_houses[1]);
-    //     address _wallet = _houses[2];
-
-    //     uint id = houses.push(House(_direccion, _propietario, _wallet)) - 1;
-    //     houseToOwner[id] = _wallet;
-    // }
     function createHouse(
         string memory _propietario,
         address _walletPropietario,
@@ -69,10 +48,33 @@ contract Houses {
         )) - 1;
         houseToOwner[id] = _walletPropietario;
     }
-    // function _generateRandomDna(string memory _str) private view returns (uint) {
-    //     uint rand = uint(keccak256(abi.encodePacked(_str)));
-    //     return rand % dnaModulus;
-    // }
+
+    function editHouse(
+        uint _index,
+        string memory _propietario,
+        address _walletPropietario,
+        string memory _curp,
+        string memory _fecha,
+        string memory _escritura,
+        string memory _notaria,
+        address _walletNotario,
+        string memory _solicitud,
+        string memory _ubicacion,
+        string[] memory _locationData
+    ) public {
+        House storage myHouse = houses[_index];
+        myHouse.propietario = _propietario;
+        myHouse.walletPropietario = _walletPropietario;
+        myHouse.curp = _curp;
+        myHouse.fecha = _fecha;
+        myHouse.escritura = _escritura;
+        myHouse.notaria = _notaria;
+        myHouse.walletNotario = _walletNotario;
+        myHouse.solicitud = _solicitud;
+        myHouse.ubicacion = _ubicacion;
+        myHouse.locationData = _locationData;
+    }
+
     function getAll() public view returns(House[] memory) {
         return houses;
     }
