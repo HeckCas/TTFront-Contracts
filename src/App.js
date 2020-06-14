@@ -8,6 +8,8 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import EditProperty from './pages/EditProperty'
 import Certificado from './pages/Certifiado'
+import AvisoPrivacidad from './pages/AvisoPrivacidad'
+import Footer from './components/Footer'
 
 
 import axios from 'axios'
@@ -49,8 +51,11 @@ function App() {
             />
           ))
         }
+        <Route exact path="/aviso" component={AvisoPrivacidad} />
       </Switch>
+      <Footer/>
     </Router>
+
   );
 }
 
