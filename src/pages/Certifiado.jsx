@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import Map from '../components/Map'
+import QrTransaction from '../components/qrtransaction'
 import Cert from '../images/logo.png'
 import BgCert from '../images/cert-op.png'
 import axios from 'axios'
 import '../styles/Certificado.css'
-const GmpsApiKey = process.env.REACT_APP_GMAPS_API_KEY
 const ApiUrl = process.env.REACT_APP_APIURL
+
 export default function Certifiado(props) {
     const [ownerName, setOwnerName] = useState('')
     const [ownerWallet, setOwnerWallet] = useState('')
@@ -33,7 +33,6 @@ export default function Certifiado(props) {
 
     useEffect(() => {
         getProperty(props.id)
-        
         return () => {
             console.log('remove from EditProperty')
         }
@@ -94,13 +93,19 @@ export default function Certifiado(props) {
             if(res.data.idBc){
                 setBC(res.data.idBc)
             }
+            if(res.data.hash) {
+                if (statehash && statehash.includes(res.data.hash)) {
+                } else {
+                    setHash(res.data.hash)
+                }
+            }
         }
         setLoading(false)
     }
 
     return (
         <div className="container">
-            <div className="container-cert" style={{ backgroundImage: `url(${BgCert})` }}>
+            <div className="container-cert">
                 <div className="border">
                     <div className="header-cert">
                         <h1>Certificado de propiedad de un inmueble</h1>
@@ -111,8 +116,21 @@ export default function Certifiado(props) {
                         <h3><span className="hunderline">{ownerName}</span></h3>
                     </div>
                     <div className="info">
+                        <h2>Wallet del Propietario: </h2>
+                        <h3><span className="hunderline">{ownerWallet}</span></h3>
+                    </div>
+                    <div className="info">
                         <h2>Dirección:</h2>
                         <h3><span className="hunderline">{ubicacion}</span></h3>
+                    </div>
+                    <br/>
+                    <div className="info">
+                        <h3>El inmueble ha tenido {statehash.length} transaccion(es)</h3>
+                        {
+                            statehash && statehash.length > 0 ? statehash.map((hash) => {
+                                return <QrTransaction hash={hash} key={hash}/>
+                            }) : ''
+                        }
                     </div>
                 </div>
             </div>

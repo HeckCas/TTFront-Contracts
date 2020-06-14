@@ -32,7 +32,7 @@
 
 .header-cert h1{
     width: 40%;
-    text-align: right;
+    text-align: center;
     font-size: 2em;
     font-weight: bolder;
     color: #063b7c;
@@ -58,4 +58,18 @@
 
 .hunderline{
     text-decoration: underline #000; 
+}
+
+.qrTransContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 1.5%;
+    padding: .5%;
+}
+
+.qrTransContainer canvas {
+    width: 70px !important;
+    height: 70px !important;
 }

@@ -3,7 +3,7 @@ import Map from '../components/Map'
 import axios from 'axios'
 import Web3 from 'web3'
 // import Houses from '../abisProduction/Houses.json'
-// import Houses from '../abis/Houses.json'
+import Houses from '../abis/Houses.json'
 import swal from 'sweetalert'
 import '../styles/New.css'
 const GmpsApiKey = process.env.REACT_APP_GMAPS_API_KEY
@@ -70,16 +70,6 @@ export default function NewProperty(props) {
     //     loadBlockchainData()
     // }, [account])
 
-    useEffect(() => {
-        const allHouses = async() => {
-            axios.get(`${ApiUrl}/properties/`)
-            .then(function (response) {
-                setCounter(response.data.length + 1)
-            })
-        }
-        allHouses()
-    }, [])
-
     // useEffect(() => {
     //     const getAllHouses = () => {
     //         if (houses) {
@@ -88,6 +78,7 @@ export default function NewProperty(props) {
     //             .call()
     //             .then((allHouses) => {
     //                 console.log('%c Arreglo con todas las casas', 'color: #4af2a1', allHouses)
+    //                 setCounter(allHouses.length)
     //                 return allHouses
     //             })
     //         }
