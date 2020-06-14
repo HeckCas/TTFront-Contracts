@@ -4,7 +4,7 @@ import axios from 'axios'
 import Map from '../components/Map'
 import Web3 from 'web3'
 import swal from 'sweetalert';
-import Houses from '../abis/Houses.json'
+//import Houses from '../abis/Houses.json'
 // import Houses from '../abisProduction/Houses.json'
 import '../styles/New.css'
 const GmpsApiKey = process.env.REACT_APP_GMAPS_API_KEY
