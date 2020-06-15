@@ -37,7 +37,7 @@
   .table_reg {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 3%;
+    height: 0px;
   }
   .table td {
     border-left: none;

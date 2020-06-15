@@ -27,7 +27,7 @@ export default function Dashboard() {
             <div className="container">
             <div className="row title_register table_reg">
                 <h2>Lista de inmuebles registrados</h2>
-                    <Link to='/new/property' className="btn btn-primary text-right" style={{color: 'white', display: 'flex', alignItems: 'center' }}>Registrar inmueble</Link>
+                    <Link to='/new/property' className="btn btn-primary text-right" style={{height: '50px', color: 'white', display: 'flex', alignItems: 'center' }}>Registrar inmueble</Link>
             </div>
             <div className="row">
                 <div className="col-xs-12">

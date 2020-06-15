@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Map from '../components/Map'
 import axios from 'axios'
 import Web3 from 'web3'
-// import Houses from '../abisProduction/Houses.json'
-//import Houses from '../abis/Houses.json'
+import Houses from '../abisProduction/Houses.json'
+// import Houses from '../abis/Houses.json'
 import swal from 'sweetalert'
 import '../styles/New.css'
 const GmpsApiKey = process.env.REACT_APP_GMAPS_API_KEY
@@ -33,122 +33,122 @@ export default function NewProperty(props) {
     const [statehash, setHash] = useState('')
     const [counter, setCounter] = useState('')
 
-    // useEffect(() => {
-    //     const loadWeb3 = async() => {
-    //         if (window.ethereum) {
-    //             window.web3 = new Web3(window.ethereum)
-    //             await window.ethereum.enable()
-    //         }
-    //         else if (window.web3) {
-    //             window.web3 = new Web3(window.web3.currentProvider)
-    //         }
-    //         else {
-    //             window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-    //         }
-    //     }
-    //     const loadBlockchainData = async() => {
-    //         const web3 = window.web3
-    //         const accounts = await web3.eth.getAccounts()
-    //         setAccount(accounts[0])
-    //         if(account) {
-    //             const ethBalance = await web3.eth.getBalance(account)
-    //             console.log('%c Cuenta y Balance ', 'color: #035fb9; background-color: #b0f566' , account, ethBalance)
-    //             setEthBalance(ethBalance)
-    //             //Load HOUSES Contract
-    //             const networkId = await web3.eth.net.getId()
-    //             const housesData = Houses.networks[networkId]
-    //             if(housesData) {
-    //               const houses = new web3.eth.Contract(Houses.abi, housesData.address)
-    //               setHouses(houses)
-    //               console.log(houses)
-    //             } else {
-    //                 window.alert('EthSwap contract not deployed to detected network.')
-    //             }
-    //         }
-    //     }
-    //     loadWeb3()
-    //     loadBlockchainData()
-    // }, [account])
+    useEffect(() => {
+        const loadWeb3 = async() => {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum)
+                await window.ethereum.enable()
+            }
+            else if (window.web3) {
+                window.web3 = new Web3(window.web3.currentProvider)
+            }
+            else {
+                window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+            }
+        }
+        const loadBlockchainData = async() => {
+            const web3 = window.web3
+            const accounts = await web3.eth.getAccounts()
+            setAccount(accounts[0])
+            if(account) {
+                const ethBalance = await web3.eth.getBalance(account)
+                console.log('%c Cuenta y Balance ', 'color: #035fb9; background-color: #b0f566' , account, ethBalance)
+                setEthBalance(ethBalance)
+                //Load HOUSES Contract
+                const networkId = await web3.eth.net.getId()
+                const housesData = Houses.networks[networkId]
+                if(housesData) {
+                  const houses = new web3.eth.Contract(Houses.abi, housesData.address)
+                  setHouses(houses)
+                  console.log(houses)
+                } else {
+                    window.alert('EthSwap contract not deployed to detected network.')
+                }
+            }
+        }
+        loadWeb3()
+        loadBlockchainData()
+    }, [account])
 
-    // useEffect(() => {
-    //     const getAllHouses = () => {
-    //         if (houses) {
-    //             houses.methods
-    //             .getAll()
-    //             .call()
-    //             .then((allHouses) => {
-    //                 console.log('%c Arreglo con todas las casas', 'color: #4af2a1', allHouses)
-    //                 setCounter(allHouses.length)
-    //                 return allHouses
-    //             })
-    //         }
-    //     }
-    //     getAllHouses()
-    // }, [houses])
+    useEffect(() => {
+        const getAllHouses = () => {
+            if (houses) {
+                houses.methods
+                .getAll()
+                .call()
+                .then((allHouses) => {
+                    console.log('%c Arreglo con todas las casas', 'color: #4af2a1', allHouses)
+                    setCounter(allHouses.length)
+                    return allHouses
+                })
+            }
+        }
+        getAllHouses()
+    }, [houses])
 
-    // const createHouse = async(data) => {
-    //     let {
-    //         ownerName,
-    //         ownerWallet,
-    //         ownerCurp,
-    //         birthdate,
-    //         deedNumber,
-    //         notaria,
-    //         walletNotario,
-    //         numSolicitud,
-    //         ubicacion
-    //     } = data
+    const createHouse = async(data) => {
+        let {
+            ownerName,
+            ownerWallet,
+            ownerCurp,
+            birthdate,
+            deedNumber,
+            notaria,
+            walletNotario,
+            numSolicitud,
+            ubicacion
+        } = data
 
-    //     let locationData = [calle, numExterior, numInterior, colonia, estado, municipio, codigoPosal]
-    //     swal({
-    //     title: "Se está a punto de registrar un nuevo Inmueble",
-    //     text: `
-    //         Los datos a registar son:
-    //         Nombre de propietario: ${ownerName}
-    //         Dirección de Inmueble ${ubicacion}
-    //         Wallet en ETH bloclkchain de Propietario ${ownerWallet}
-    //     `,
-    //     icon: "info",
-    //     buttons: true,
-    //     })
-    //     .then((acceptHouse) => {
-    //     if (acceptHouse) {
-    //         houses.methods
-    //         .createHouse(
-    //             ownerName,
-    //             ownerWallet,
-    //             ownerCurp,
-    //             birthdate,
-    //             deedNumber,
-    //             notaria,
-    //             walletNotario,
-    //             numSolicitud,
-    //             ubicacion,
-    //             locationData
-    //         )
-    //         .send({ from: account })
-    //         .on('transactionHash', (hash) => {
-    //             swal({
-    //                 title: "Registro de Inmueble exitoso",
-    //                 text: `El hash de transacción a la Blockchain es ${hash}`,
-    //                 icon: "success",
-    //                 button: "Gracias 😅",
-    //             })
-    //             .then(() => {
-    //                 setHash(hash)
-    //             })
-    //             .then(() => {
-    //                 regNewProperty(data, hash)
-    //             })
-    //         })
-    //     } else {
-    //         swal({
-    //         title: "No se registro ningún Inmueble",
-    //         icon: "warning",
-    //         });
-    //     }
-    //     });
-    // }
+        let locationData = [calle, numExterior, numInterior, colonia, estado, municipio, codigoPosal]
+        swal({
+        title: "Se está a punto de registrar un nuevo Inmueble",
+        text: `
+            Los datos a registar son:
+            Nombre de propietario: ${ownerName}
+            Dirección de Inmueble ${ubicacion}
+            Wallet en ETH bloclkchain de Propietario ${ownerWallet}
+        `,
+        icon: "info",
+        buttons: true,
+        })
+        .then((acceptHouse) => {
+        if (acceptHouse) {
+            houses.methods
+            .createHouse(
+                ownerName,
+                ownerWallet,
+                ownerCurp,
+                birthdate,
+                deedNumber,
+                notaria,
+                walletNotario,
+                numSolicitud,
+                ubicacion,
+                locationData
+            )
+            .send({ from: account })
+            .on('transactionHash', (hash) => {
+                swal({
+                    title: "Registro de Inmueble exitoso",
+                    text: `El hash de transacción a la Blockchain es ${hash}`,
+                    icon: "success",
+                    button: "Gracias 😅",
+                })
+                .then(() => {
+                    setHash(hash)
+                })
+                .then(() => {
+                    regNewProperty(data, hash)
+                })
+            })
+        } else {
+            swal({
+            title: "No se registro ningún Inmueble",
+            icon: "warning",
+            });
+        }
+        });
+    }
 
     const regNewProperty = async(data, hash) => {
         const allData = {
@@ -166,43 +166,6 @@ export default function NewProperty(props) {
 
     /**
      Version CON Blockchain
-    */
-    // const onSubmit = e => {
-    //     e.preventDefault()
-    //     const logUser = {
-    //         "ownerName": ownerName,
-    //         "ownerWallet": ownerWallet,
-    //         "ownerCurp": ownerCurp,
-    //         "birthdate": birthdate,
-    //         "deedNumber": deedNumber,
-    //         "notaria": notaria,
-    //         "walletNotario": walletNotario,
-    //         "numSolicitud": numSolicitud,
-    //         "ubicacion": ubicacion,
-    //         "calle": calle,
-    //         "numExterior": numExterior,
-    //         "numInterior": numInterior,
-    //         "colonia": colonia,
-    //         "estado": estado,
-    //         "municipio": municipio,
-    //         "codigoPosal": codigoPosal
-    //     }
-    //     createHouse(logUser)
-    // }
-
-    const handleLocationValues = (data) => {
-        const {address, street, exterior, neighborhood, state, municipio, cp} = data
-        setUbicacion(address)
-        setCalle(street)
-        setNumExterior(exterior)
-        setColonia(neighborhood)
-        setEstado(state)
-        setMunicipio(municipio)
-        setCodigoPosal(cp)
-    }
-
-    /**
-     Version Sin Blockchain
     */
     const onSubmit = e => {
         e.preventDefault()
@@ -224,8 +187,45 @@ export default function NewProperty(props) {
             "municipio": municipio,
             "codigoPosal": codigoPosal
         }
-        regNewProperty(logUser)
+        createHouse(logUser)
     }
+
+    const handleLocationValues = (data) => {
+        const {address, street, exterior, neighborhood, state, municipio, cp} = data
+        setUbicacion(address)
+        setCalle(street)
+        setNumExterior(exterior)
+        setColonia(neighborhood)
+        setEstado(state)
+        setMunicipio(municipio)
+        setCodigoPosal(cp)
+    }
+
+    /**
+     Version Sin Blockchain
+    */
+    // const onSubmit = e => {
+    //     e.preventDefault()
+    //     const logUser = {
+    //         "ownerName": ownerName,
+    //         "ownerWallet": ownerWallet,
+    //         "ownerCurp": ownerCurp,
+    //         "birthdate": birthdate,
+    //         "deedNumber": deedNumber,
+    //         "notaria": notaria,
+    //         "walletNotario": walletNotario,
+    //         "numSolicitud": numSolicitud,
+    //         "ubicacion": ubicacion,
+    //         "calle": calle,
+    //         "numExterior": numExterior,
+    //         "numInterior": numInterior,
+    //         "colonia": colonia,
+    //         "estado": estado,
+    //         "municipio": municipio,
+    //         "codigoPosal": codigoPosal
+    //     }
+    //     regNewProperty(logUser)
+    // }
 
     return (
         <div className="container">
